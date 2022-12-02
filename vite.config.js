@@ -7,7 +7,7 @@ export default defineConfig(({ command, mode }) => {
   // Load env file based on `mode` in the current working directory.
   // Set the third parameter to '' to load all env regardless of the `VITE_` prefix.
   const env = loadEnv(mode, process.cwd(), '');
-  console.log(env.PORT);
+  // console.log(env.PORT);
   return {
     // vite config
     define: {
@@ -15,7 +15,7 @@ export default defineConfig(({ command, mode }) => {
     },
     plugins: [react()],
     server: {
-      port: env.PORT,
+      port: env.PORT || 5173,
     },
     // preview: {
     //   port: env.PREVIEW_PORT,
