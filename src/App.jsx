@@ -8,6 +8,7 @@ import PrivateRoute from './components/ProtectedRoute/PrivateRoute';
 import LoggedOut from './components/LoggedOut/LoggedOut';
 import Map from './pages/Map/Map';
 import 'leaflet/dist/leaflet.css';
+import Conversations from './pages/Conversations/Conversations';
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
         <Route element={<PrivateRoute />}>
           {/* All routes after the PrivateRoute require the user to be loggedIn */}
           <Route path="/profile" element={<Profile />} />
+          <Route path="/conversations" element={<Conversations />} />
         </Route>
       </Routes>
     </div>
