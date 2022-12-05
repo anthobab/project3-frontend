@@ -1,9 +1,53 @@
+.form-content {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  /* margin: 1rem; */
+}
+
 .FormService {
   display: flex;
   flex-direction: column;
-  margin: 1rem;
+  margin-bottom: 1rem;
+  flex-grow: 1;
+  align-items: stretch;
+}
+
+.FormService textarea {
+  flex-grow: 1;
 }
 
 .FormService .previewLoc {
-  height: 10rem;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Tage Step */
+
+.tag-element {
+  color: white;
+  background-color: var(--color-red);
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem 1rem 0.5rem 1rem;
+  margin: 1rem;
+  border-radius: 0.7rem;
+}
+
+/* bottom buttons */
+.step-buttons {
+  display: flex;
+}
+
+.step-buttons > div {
+  flex-grow: 1;
+  display: flex;
+}
+
+div .btn-container:has(.back-button) {
+  justify-content: flex-start;
+}
+div .btn-container:has(.next-button) {
+  justify-content: flex-end;
 }
