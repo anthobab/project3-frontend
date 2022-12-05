@@ -9,6 +9,7 @@ import LoggedOut from './components/LoggedOut/LoggedOut';
 import MapZone from './components/MapZone/MapZone';
 import 'leaflet/dist/leaflet.css';
 import MyServices from './pages/MyServices';
+import Conversations from './pages/Conversations/Conversations';
 
 function App() {
   const coordinate = {
@@ -30,6 +31,7 @@ function App() {
           {/* All routes after the PrivateRoute require the user to be loggedIn */}
           <Route path="/profile" element={<Profile />} />
           <Route path="/myservices" element={<MyServices />} />
+          <Route path="/conversations" element={<Conversations />} />
         </Route>
       </Routes>
     </div>

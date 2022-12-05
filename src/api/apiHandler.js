@@ -1,9 +1,7 @@
 import axios from 'axios';
 
-console.log(import.meta.env);
-
 const apiHandler = axios.create({
-  baseURL: import.meta.env.VITE_BACKEND_URL,
+  baseURL: import.meta.env.VITE_BACKEND_URL || 'http://localhost:8080',
   withCredentials: true,
 });
 
@@ -49,6 +47,13 @@ const service = {
   signin(userInfo) {
     return service
       .post('/api/v1/auth/signin', userInfo)
+      .then((res) => res.data)
+      .catch(errorHandler);
+  },
+
+  getConversations() {
+    return service
+      .get('/api/v1/conversations')
       .then((res) => res.data)
       .catch(errorHandler);
   },
