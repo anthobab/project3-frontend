@@ -4,6 +4,7 @@ import apiHandler from '../../api/apiHandler';
 import { useNavigate } from 'react-router-dom';
 import './FormService.css';
 import MapZone from '../MapZone/MapZone';
+import DragableMapZone from '../MapZone/DragableMapZone';
 
 const FormService = () => {
   const [geoloc, setGeoloc] = useState({
@@ -85,7 +86,8 @@ const FormService = () => {
         {/* TODO : Tags & choice location address */}
         location:{console.log(geoloc.coordinates)}
         <div className="previewLoc">
-          <MapZone coordinate={coordinates} />
+          {/* <MapZone coordinate={coordinates} /> */}
+          <DragableMapZone coordinate={coordinates} />
         </div>
         <button>Create this service and add availabilities</button>
       </form>
