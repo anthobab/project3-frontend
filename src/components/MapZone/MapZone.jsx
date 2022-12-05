@@ -1,16 +1,22 @@
 import React from 'react';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
-import './Map.css';
+import { useParams } from 'react-router-dom';
+import './MapZone.css';
 
-const Map = () => {
+const MapZone = ({ coordinate }) => {
   return (
-    <div style={{ height: '95vh' }}>
-      <MapContainer style={{ height: '100%' }} center={[48.8524, 2.388]} zoom={5} scrollWheelZoom={true}>
+    <div className="MapZone">
+      <MapContainer
+        style={{ height: '100%' }}
+        center={[coordinate.latitude, coordinate.longitude]}
+        zoom={14}
+        scrollWheelZoom={true}
+      >
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
-        <Marker position={[48.8525, 2.388]}>
+        <Marker position={[coordinate.latitude, coordinate.longitude]}>
           <Popup>
             A pretty CSS3 popup. <br /> Easily customizable.
           </Popup>
@@ -20,4 +26,4 @@ const Map = () => {
   );
 };
 
-export default Map;
+export default MapZone;

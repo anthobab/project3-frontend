@@ -1,0 +1,9 @@
+.FormService {
+  display: flex;
+  flex-direction: column;
+  margin: 1rem;
+}
+
+.FormService .previewLoc {
+  height: 10rem;
+}
