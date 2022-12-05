@@ -1,9 +1,13 @@
 import React from 'react';
+import useAuth from '../auth/useAuth';
 
 const Profile = () => {
+  const { isLoggedIn, currentUser, removeUser } = useAuth();
+
   return (
     <div>
-      <p>Welcome to your protected profile!</p>
+      <h2>Welcome {currentUser.username}</h2>
+      <button onClick={removeUser}>Log-Out</button>
     </div>
   );
 };

@@ -1,4 +1,7 @@
 .NavMain {
   display: flex;
   justify-content: space-between;
+  font-size: 24px;
+  color: #c5cdd6;
+  margin: 0 0.5rem 1rem;
 }
