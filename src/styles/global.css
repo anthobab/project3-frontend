@@ -1,5 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap');
 
+:root {
+  --color-yellow: #ffb703;
+  --color-red: #d62828;
+  --color-blue: #003049;
+  --color-dark: #212529;
+  --color-grey: #6c757d;
+  --color-light: #c5cdd6;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -17,4 +26,10 @@ a {
 
 ul {
   list-style-type: none;
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
 }
