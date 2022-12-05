@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { useCallback, useMemo, useRef, useState } from 'react';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
-import { useParams } from 'react-router-dom';
+import DraggableMarkerComponent from './DraggableMarkerComponent';
 import './MapZone.css';
 
-const MapZone = ({ coordinate }) => {
+const DragableMapZone = ({ coordinate }) => {
   const center = {
     lat: 51.505,
     lng: -0.09,
@@ -52,15 +52,21 @@ const MapZone = ({ coordinate }) => {
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
-        <Marker position={[coordinate.latitude, coordinate.longitude]}>
+        {/* <Marker position={[coordinate.latitude, coordinate.longitude]}>
           <Popup>
-            A pretty CSS3 popup. <br /> Easily customizable.
+            <img src="https://toppng.com/uploads/preview/lightning-bolt-11549723188q9jgshmchb.png" alt="" />
+            Dragable ?.
           </Popup>
-        </Marker>
-        <DraggableMarker />
+        </Marker> */}
+        <DraggableMarkerComponent
+          center={{
+            lat: coordinate.latitude,
+            lng: coordinate.longitude,
+          }}
+        />
       </MapContainer>
     </div>
   );
 };
 
-export default MapZone;
+export default DragableMapZone;
