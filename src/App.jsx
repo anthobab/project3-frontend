@@ -6,23 +6,30 @@ import Signup from './pages/Signup';
 import Profile from './pages/Profile';
 import PrivateRoute from './components/ProtectedRoute/PrivateRoute';
 import LoggedOut from './components/LoggedOut/LoggedOut';
-import Map from './pages/Map/Map';
+import MapZone from './components/MapZone/MapZone';
 import 'leaflet/dist/leaflet.css';
+import MyServices from './pages/MyServices';
 
 function App() {
+  const coordinate = {
+    latitude: 48.8525,
+    longitude: 2.388,
+  };
+  console.log(coordinate);
   return (
     <div className="App">
       <NavMain />
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/map" element={<MapZone coordinate={coordinate} />} />
         <Route element={<LoggedOut />}>
           <Route path="/signin" element={<Signin />} />
           <Route path="/signup" element={<Signup />} />
-          <Route path="/map" element={<Map />} />
         </Route>
         <Route element={<PrivateRoute />}>
           {/* All routes after the PrivateRoute require the user to be loggedIn */}
           <Route path="/profile" element={<Profile />} />
+          <Route path="/myservices" element={<MyServices />} />
         </Route>
       </Routes>
     </div>
