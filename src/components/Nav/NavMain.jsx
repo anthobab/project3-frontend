@@ -2,25 +2,33 @@ import { NavLink } from 'react-router-dom';
 import useAuth from '../../auth/useAuth';
 import './NavMain.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBolt, faMap, faUser, faBellConcierge, faRightFromBracket } from '@fortawesome/free-solid-svg-icons';
+import { faBolt, faMap, faUserAstronaut, faSquarePlus, faUser, faComments } from '@fortawesome/free-solid-svg-icons';
 
 const NavMain = () => {
   const { isLoggedIn } = useAuth();
+
+  let activeStyle = {
+    color: '#D62828',
+  };
+
   return (
     <nav className="NavMain">
-      <NavLink className="logo" to="/">
+      <NavLink className="logo" to="/" style={({ isActive }) => (isActive ? activeStyle : undefined)}>
         <FontAwesomeIcon icon={faBolt} style />
       </NavLink>
-      <NavLink to="/map">
+      <NavLink to="/map" style={({ isActive }) => (isActive ? activeStyle : undefined)}>
         <FontAwesomeIcon icon={faMap} />
       </NavLink>
       {isLoggedIn && (
         <>
-          <NavLink to="/myservices">
-            <FontAwesomeIcon icon={faBellConcierge} />
+          <NavLink to="/myservices" style={({ isActive }) => (isActive ? activeStyle : undefined)}>
+            <FontAwesomeIcon icon={faSquarePlus} />
           </NavLink>
-          <NavLink to="/profile">
-            <FontAwesomeIcon icon={faUser} />
+          <NavLink to="/conversations" style={({ isActive }) => (isActive ? activeStyle : undefined)}>
+            <FontAwesomeIcon icon={faComments} />
+          </NavLink>
+          <NavLink to="/profile" style={({ isActive }) => (isActive ? activeStyle : undefined)}>
+            <FontAwesomeIcon icon={faUserAstronaut} />
           </NavLink>
           {/* <NavLink onClick={removeUser}>
             <FontAwesomeIcon icon={faRightFromBracket} />
@@ -30,8 +38,8 @@ const NavMain = () => {
       )}
       {!isLoggedIn && (
         <>
-          <NavLink to="/signin">
-            <FontAwesomeIcon icon={faRightFromBracket} />
+          <NavLink to="/signin" style={({ isActive }) => (isActive ? activeStyle : undefined)}>
+            <FontAwesomeIcon icon={faUser} />
           </NavLink>
           {/* <NavLink to="/signin">Log in</NavLink>
           <NavLink to="/signup">Sign Up</NavLink> */}

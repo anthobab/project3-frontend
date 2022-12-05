@@ -1,15 +1,14 @@
 import { Routes, Route } from 'react-router-dom';
-import NavMain from './components/Nav/NavMain';
 import Home from './pages/Home';
 import Signin from './pages/Signin';
 import Signup from './pages/Signup';
 import Profile from './pages/Profile';
+import Conversations from './pages/Conversations/Conversations';
+import NavMain from './components/Nav/NavMain';
 import PrivateRoute from './components/ProtectedRoute/PrivateRoute';
 import LoggedOut from './components/LoggedOut/LoggedOut';
 import MapZone from './components/MapZone/MapZone';
-import 'leaflet/dist/leaflet.css';
 import MyServices from './pages/MyServices';
-import Conversations from './pages/Conversations/Conversations';
 
 function App() {
   const coordinate = {
