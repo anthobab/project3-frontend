@@ -58,6 +58,20 @@ const service = {
       .catch(errorHandler);
   },
 
+  getMessages(conversationId) {
+    return service
+      .get('/api/v1/conversations/' + conversationId)
+      .then((res) => res.data)
+      .catch(errorHandler);
+  },
+
+  sendMessage(messageData) {
+    return service
+      .post('/api/v1/conversations/' + conversationId, messageData)
+      .then((res) => res.data)
+      .catch(errorHandler);
+  },
+
   // getAllTheCats() {
   // 	return service
   // 		.get("/api/cats")
