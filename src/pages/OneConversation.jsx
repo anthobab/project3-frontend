@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import apiHandler from '../../api/apiHandler';
+import apiHandler from '../api/apiHandler';
 
-const Chat = () => {
+const OneConversation = () => {
   const { id } = useParams();
   const [messages, setMessages] = useState([]);
 
@@ -16,7 +16,7 @@ const Chat = () => {
   return (
     <>
       {messages.map((message) => (
-        <div>
+        <div style={{ border: '1px solid black', margin: '15px 30px', padding: '5px', borderRadius: '10px' }}>
           <h3>{message.sender.username}</h3>
           <p>{message.content}</p>
         </div>
@@ -25,4 +25,4 @@ const Chat = () => {
   );
 };
 
-export default Chat;
+export default OneConversation;

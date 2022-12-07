@@ -3,13 +3,13 @@ import Home from './pages/Home';
 import Signin from './pages/Signin';
 import Signup from './pages/Signup';
 import Profile from './pages/Profile';
-import Conversations from './pages/Conversations/Conversations';
+import Conversations from './pages/Conversations';
 import NavMain from './components/Nav/NavMain';
 import PrivateRoute from './components/ProtectedRoute/PrivateRoute';
 import LoggedOut from './components/LoggedOut/LoggedOut';
 import MapZone from './components/MapZone/MapZone';
 import MyServices from './pages/MyServices';
-import Chat from './components/Chat/Chat';
+import OneConversation from './pages/OneConversation';
 
 function App() {
   const coordinate = {
@@ -32,7 +32,7 @@ function App() {
           <Route path="/profile" element={<Profile />} />
           <Route path="/myservices" element={<MyServices />} />
           <Route path="/conversations" element={<Conversations />} />
-          <Route path="/conversations/:id" element={<Chat />} />
+          <Route path="/conversations/:id" element={<OneConversation />} />
         </Route>
       </Routes>
     </div>
