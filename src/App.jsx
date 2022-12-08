@@ -16,13 +16,14 @@ function App() {
     latitude: 48.8525,
     longitude: 2.388,
   };
+  const coordinates = [48.8525, 2.388];
   console.log(coordinate);
   return (
     <div className="App">
       <NavMain />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/map" element={<MapZone coordinate={coordinate} />} />
+        <Route path="/map" element={<MapZone coordinates={coordinates} />} />
         <Route element={<LoggedOut />}>
           <Route path="/signin" element={<Signin />} />
           <Route path="/signup" element={<Signup />} />

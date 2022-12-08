@@ -4,20 +4,15 @@ import { useParams } from 'react-router-dom';
 import { iconLogo } from './Icon';
 import './MapZone.css';
 
-const MapZone = ({ coordinate }) => {
+const MapZone = ({ coordinates }) => {
   return (
     <div className="MapZone">
-      <MapContainer
-        style={{ height: '100%' }}
-        center={[coordinate.latitude, coordinate.longitude]}
-        zoom={14}
-        scrollWheelZoom={true}
-      >
+      <MapContainer style={{ height: '100%' }} center={coordinates} zoom={14} scrollWheelZoom={true}>
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
-        <Marker icon={iconLogo} position={[coordinate.latitude, coordinate.longitude]}>
+        <Marker icon={iconLogo} position={coordinates}>
           <Popup>
             <img
               src="https://png.pngtree.com/png-clipart/20210507/ourmid/pngtree-abstract-white-light-sparkle-cross-special-effects-png-image_3245301.jpg"

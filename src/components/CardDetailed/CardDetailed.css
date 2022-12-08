@@ -1,0 +1,121 @@
+.CardDetailed {
+  /* background-color: aliceblue; */
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  flex-grow: 1;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  max-width: 400px;
+  box-shadow: 0 0 20px 4px var(--color-blue);
+  border-radius: 2.2rem 2.2rem 1rem 1rem;
+  overflow: hidden;
+  /* border: 2px var(--color-blue) solid; */
+
+  & .picture-zone {
+    position: relative;
+  }
+  & .ImagePreview {
+    position: relative;
+    width: 100%;
+    max-width: 400px;
+  }
+  & .favHeart {
+    font-size: 1.7rem;
+    color: var(--color-red);
+    top: 1rem;
+    left: 1rem;
+    position: absolute;
+    z-index: 10;
+  }
+
+  & .title-line {
+    display: flex;
+    width: 100%;
+    max-width: 400px;
+    justify-content: space-between;
+    position: absolute;
+    bottom: 0rem;
+    left: 0;
+    padding: 0.5rem;
+    /* margin: 0 0.2rem; dont work */
+    box-sizing: border-box;
+    color: white;
+    font-weight: 700;
+    & div {
+      padding: 0.5rem 1rem;
+      border-radius: 1rem;
+    }
+    & .container {
+      /* background-color: #00304985; */
+      /* filter: alpha(opacity=10); */
+      position: relative;
+
+      & div {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+      }
+      & .text {
+        color: white;
+      }
+      & .block {
+        background-color: var(--color-dark);
+        opacity: 0.8;
+        /* IE Chrome ... */
+        -moz-opacity: 0.6;
+        /* Mozilla */
+      }
+    }
+  }
+
+  & .tag-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.2rem;
+    /* margin-top: 1rem; */
+    margin: 0.5rem 0.3rem 0.5rem;
+  }
+
+  & .tag-el {
+    color: white;
+    background-color: var(--color-red);
+    padding: 0.3rem 0.6rem;
+    /* margin: -0.5rem 0.1rem 0; */
+    /* margin-top: -0.5rem; */
+    border-radius: 0.7rem;
+    font-style: oblique;
+  }
+
+  & .description {
+    white-space: pre-wrap;
+    margin: 0.5rem 0.3rem 0.5rem;
+
+    max-height: 20%;
+    overflow-y: scroll;
+  }
+  & .MapZone {
+    flex-grow: 1;
+    min-height: 30%;
+  }
+
+  ::-webkit-scrollbar-track {
+    /* -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3); */
+    border-radius: 10px;
+    background-color: #f5f5f5;
+  }
+
+  ::-webkit-scrollbar {
+    width: 12px;
+    border-radius: 10px;
+    background-color: #f5f5f5;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    /* -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3); */
+    background-color: var(--color-red);
+  }
+}

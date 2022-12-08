@@ -3,21 +3,24 @@ import useForm from '../../hooks/useForm';
 import apiHandler from '../../api/apiHandler';
 import { useNavigate } from 'react-router-dom';
 import './FormService.css';
-import MapZone from '../MapZone/MapZone';
+// import MapZone from '../MapZone/MapZone';
 import DragableMapZone from '../MapZone/DragableMapZone';
 import TagSearch from '../TagSearch/TagSearch';
+import LoadImagePreview from '../LoadImagePreview/LoadImagePreview';
+import CardDetailed from '../CardDetailed/CardDetailed';
 
-export const MyTagsContext = createContext(null);
+export const MyLocContext = createContext(null);
 
 const FormService = () => {
   const [step, setStep] = useState(1);
-  const stepNumber = 4;
+  const stepNumber = 5;
 
   // Tag part
   const [myTags, setMyTags] = useState([]);
 
   // Geoloc
   const [geoloc, setGeoloc] = useState({
+    initialized: false,
     permission: 'denied',
     coordinates: {
       latitude: 48.85356416664298,
@@ -25,7 +28,7 @@ const FormService = () => {
     },
   });
   function report(state) {
-    console.log(`Permission ${state}`);
+    // console.log(`Permission ${state}`);
   }
 
   function getGeoloc() {
@@ -33,19 +36,20 @@ const FormService = () => {
       if (result.state === 'granted' || result.state === 'prompt') {
         report(result.state);
         navigator.geolocation.getCurrentPosition(function (position) {
-          console.log(position.coords);
+          //   console.log(position.coords);
           setGeoloc((currentloc) => ({
             ...currentloc,
             permission: result.state,
+            initialized: true,
             coordinates: {
-              longitute: position.coords.longitude,
+              longitude: position.coords.longitude,
               latitude: position.coords.latitude,
             },
           }));
         });
       } else if (result.state === 'denied') {
         report(result.state);
-        setGeoloc((currentloc) => ({ ...currentloc, permission: result.state })); // Update permission
+        setGeoloc((currentloc) => ({ ...currentloc, permission: result.state, initialized: true })); // Update permission
       }
       //   result.addEventListener('change', () => {
       //     report(result.state);
@@ -53,18 +57,43 @@ const FormService = () => {
     });
   }
   useEffect(() => {
-    getGeoloc();
-
+    if (!geoloc.initialized) {
+      getGeoloc();
+    }
     return () => {};
   }, []);
 
-  //   getGeoloc();
+  // image
+  const [imageFile, setImageFile] = useState(null);
 
-  const [{ title, description, coordinates, tags }, handleChange] = useForm({
+  useEffect(() => {
+    handleChange({
+      target: {
+        name: 'tags',
+        value: myTags,
+      },
+    });
+    handleChange({
+      target: {
+        name: 'coordinates',
+        value: [geoloc.coordinates.latitude, geoloc.coordinates.longitude],
+      },
+    });
+    handleChange({
+      target: {
+        name: 'pictureFile',
+        value: imageFile,
+      },
+    });
+    return () => {};
+  }, [step]);
+
+  const [{ title, description, coordinates, tags, pictureFile }, handleChange] = useForm({
     title: '',
     description: '',
-    coordinates: geoloc.coordinates, //[geoloc.coordinates.longitude, geoloc.coordinates.latitude],
     tags: [],
+    coordinates: [geoloc.coordinates.latitude, geoloc.coordinates.longitude], //[geoloc.coordinates.longitude, geoloc.coordinates.latitude],
+    pictureFile: {},
   });
 
   const [error, setError] = useState(null);
@@ -72,44 +101,46 @@ const FormService = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // apiHandler
-    //   .signin({ title, description, coordinates, tags })
-    //   .then((res) => {
-    //     console.log(res);
-    //     navigate('/');
-    //   })
-    //   .catch((e) => {
-    //     setError(e.response.data);
-    //   });
+    apiHandler
+      .createService({ title, description, coordinates, tags, pictureFile })
+      .then((res) => {
+        console.log(res);
+        navigate('/services/' + { res } + '/serviceitems');
+      })
+      .catch((e) => {
+        setError(e.response.data);
+      });
   };
 
   //   useEffect(() => {
-  //     console.log('mytags Updated', myTags);
+  //     // console.log('mytags Updated', myTags);
   //     return () => {};
   //   }, [myTags]);
 
   const handleOnchanged = (value) =>
-    setMyTags((curval) => {
-      curval.push(value);
-      return curval;
+    setMyTags((curVal) => {
+      return [...curVal, value];
     });
 
   const deleteHandle = (event) => {
-    console.log(event.target.parentElement.querySelector('p').textContent);
     setMyTags((currentTags) => {
       return currentTags.filter((tag) => tag.tagName !== event.target.parentElement.querySelector('p').textContent);
     });
-    console.log(myTags);
+    // console.log(myTags);
+  };
+
+  const stepNavigateHandle = (increment) => {
+    // TODO limitation condition if empty
+    setStep((curVal) => curVal + increment);
   };
 
   return (
     <>
-      {' '}
-      <MyTagsContext.Provider value={myTags}>
+      <MyLocContext.Provider value={{ geoloc, setGeoloc }}>
         <div className="form-content">
           {error && <h3 className="error">{error.message}</h3>}
           <form className="FormService" onSubmit={handleSubmit}>
-            <h2>Service:</h2>
+            {/* <h2>Service:</h2> */}
 
             {step === 1 && (
               <>
@@ -125,7 +156,7 @@ const FormService = () => {
               <>
                 <label htmlFor="tags">Choose at least 1 tag (up to 5)</label>
                 {/* <input type="text" id="tags" name="tags" onChange={handleChange} value={tags} /> */}
-                <TagSearch type="text" myTags={myTags} onChange={handleOnchanged}></TagSearch>
+                <TagSearch type="text" myTags={myTags} handleOnchanged={handleOnchanged}></TagSearch>
                 <div className="selected-tag">
                   {myTags.map((tagEl) => {
                     return (
@@ -141,25 +172,35 @@ const FormService = () => {
 
             {step === 3 && (
               <>
-                location:{console.log(geoloc.coordinates)}
+                location:
+                {/* {console.log(geoloc.coordinates)} */}
                 <div className="previewLoc">
                   {/* <MapZone coordinate={coordinates} /> */}
-                  <DragableMapZone coordinate={coordinates} />
+                  <DragableMapZone coordinate={geoloc.coordinates} />
                 </div>
               </>
             )}
 
             {step === 4 && (
               <>
-                <div className="Recap">Recap :</div>
+                <label htmlFor="pictureUrl">Add A Picture</label>
+                <LoadImagePreview imageFile={imageFile} setImageFile={setImageFile}></LoadImagePreview>
               </>
             )}
-            {step === stepNumber && <button>Create this service and go to add availabilities page</button>}
+
+            {step === 5 && (
+              <>
+                <div className="Recap">Recap :</div>
+                <CardDetailed vals={{ title, description, coordinates, tags, pictureFile }}></CardDetailed>
+              </>
+            )}
+
+            {step === stepNumber && <button>Publish this service</button>}
           </form>
           <div className="step-buttons">
             {step > 1 && (
               <div className="btn-container">
-                <button className="back-button" onClick={() => setStep((curval) => curval - 1)}>
+                <button className="back-button" onClick={() => stepNavigateHandle(-1)}>
                   Go Back
                 </button>
               </div>
@@ -167,14 +208,14 @@ const FormService = () => {
 
             {step < stepNumber && (
               <div className="btn-container">
-                <button className="next-button" onClick={() => setStep((curval) => curval + 1)}>
+                <button className="next-button" onClick={() => stepNavigateHandle(1)}>
                   Next Step
                 </button>
               </div>
             )}
           </div>
         </div>
-      </MyTagsContext.Provider>
+      </MyLocContext.Provider>
     </>
   );
 };

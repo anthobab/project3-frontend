@@ -1,0 +1,24 @@
+.ImagePreview {
+  display: flex;
+  flex-direction: column;
+}
+
+.ImagePreview picture {
+  /* max-height: 100%; */
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1.5;
+  overflow: hidden;
+  /* border-radius: 2rem 2rem 0.2rem 0.2rem; */
+  /* border-style: groove; */
+  /* box-shadow: 0 0 5px 6px var(--color-yellow); */
+}
+
+.ImagePreview img {
+  /* width: 100%; */
+  margin-left: -50%;
+  margin-top: calc(min(-50%));
+  position: absolute;
+  left: 50%;
+  top: 50%;
+}
