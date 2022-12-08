@@ -35,12 +35,7 @@ const TagSearch = ({ myTags, handleOnchanged }) => {
     setValue(event.target.value);
   };
 
-  useEffect(() => {
-    // console.log('mytags Updated', myTags);
-    return () => {};
-  }, [myTags]);
-
-  const onSearch = (tagObj) => {
+  const onTagClicked = (tagObj) => {
     // setMyTags((curval) => {
     //   curval.push(tagObj);
     //   return curval;
@@ -54,7 +49,7 @@ const TagSearch = ({ myTags, handleOnchanged }) => {
     <div className="TagSearch">
       <div className="search-inner">
         <input type="text" value={value} placeholder="Search Tag" onChange={onChangeValue} />
-        {/* <button onClick={() => onSearch(value)}> Search </button> */}
+        {/* <button onClick={() => onTagClicked(value)}> Search </button> */}
       </div>
 
       <div className="dropdown">
@@ -69,7 +64,7 @@ const TagSearch = ({ myTags, handleOnchanged }) => {
           .map((item) => (
             <div
               onClick={() => {
-                onSearch(tagsList.find((el) => el.tagName === item.tagName));
+                onTagClicked(tagsList.find((el) => el.tagName === item.tagName));
               }}
               className="dropdown-row"
               key={item.tagName}

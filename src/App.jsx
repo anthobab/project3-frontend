@@ -17,7 +17,7 @@ function App() {
     longitude: 2.388,
   };
   const coordinates = [48.8525, 2.388];
-  console.log(coordinate);
+  // console.log(coordinate);
   return (
     <div className="App">
       <NavMain />
