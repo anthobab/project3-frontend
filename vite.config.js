@@ -1,6 +1,6 @@
 import { defineConfig, loadEnv } from 'vite'; // Vite doesn't load .env by default
 import react from '@vitejs/plugin-react';
-
+import postcssNested from 'postcss-nested';
 // https://vitejs.dev/config/
 
 export default defineConfig(({ command, mode }) => {
@@ -13,7 +13,7 @@ export default defineConfig(({ command, mode }) => {
     define: {
       __APP_ENV__: env.APP_ENV,
     },
-    plugins: [react()],
+    plugins: [react(), postcssNested],
     server: {
       port: env.PORT || 5173,
     },

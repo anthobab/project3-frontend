@@ -1,0 +1,25 @@
+.LoadImagePreview {
+  display: flex;
+  flex-direction: column;
+}
+
+.LoadImagePreview picture {
+  /* max-height: 100%; */
+  position: relative;
+  height: 70vw;
+  width: 100%;
+  overflow: hidden;
+  margin: 1rem 0 0 0;
+  border-radius: 2rem;
+  /* border-style: groove; */
+  box-shadow: 0 0 5px 6px var(--color-yellow);
+}
+
+.LoadImagePreview img {
+  /* width: 100%; */
+  margin-left: -50%;
+  margin-top: calc(min(-70vw/2, -50%));
+  position: absolute;
+  left: 50%;
+  top: 50%;
+}

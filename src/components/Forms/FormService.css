@@ -10,7 +10,17 @@
   flex-direction: column;
   margin-bottom: 1rem;
   flex-grow: 1;
+
   align-items: stretch;
+
+  & #title {
+    padding: 0.5rem;
+    font-weight: 700;
+    font-size: 1.5rem;
+  }
+  & #description {
+    padding: 0.5rem;
+  }
 }
 
 .FormService textarea {
@@ -33,6 +43,7 @@
   padding: 0.5rem 1rem 0.5rem 1rem;
   margin: 1rem;
   border-radius: 0.7rem;
+  font-style: oblique;
 }
 
 /* bottom buttons */
@@ -50,4 +61,10 @@ div .btn-container:has(.back-button) {
 }
 div .btn-container:has(.next-button) {
   justify-content: flex-end;
+}
+
+@media screen and (max-width: 600px) {
+  .step-buttons {
+    order: -1;
+  }
 }

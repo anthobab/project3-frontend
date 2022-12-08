@@ -1,9 +1,8 @@
-import React, { useContext, useState } from 'react';
-import { MyTagsContext } from '../Forms/FormService';
+import React, { useEffect, useState } from 'react';
+
 import './TagSearch.css';
 
-const TagSearch = ({ myTags, onChange }) => {
-  const mytagsContext = useContext(MyTagsContext);
+const TagSearch = ({ myTags, handleOnchanged }) => {
   const [value, setValue] = useState('');
   const [tagsList, setTagsList] = useState([
     {
@@ -36,12 +35,20 @@ const TagSearch = ({ myTags, onChange }) => {
     setValue(event.target.value);
   };
 
-  const onSearch = (tagObj) => {
-    onChange(tagObj);
+  useEffect(() => {
+    // console.log('mytags Updated', myTags);
+    return () => {};
+  }, [myTags]);
 
+  const onSearch = (tagObj) => {
+    // setMyTags((curval) => {
+    //   curval.push(tagObj);
+    //   return curval;
+    // });
     // what to do :
     setValue('');
-    console.log('myTags ', myTags);
+    handleOnchanged(tagObj);
+    // console.log('myTags ', myTags);
   };
   return (
     <div className="TagSearch">
@@ -61,7 +68,9 @@ const TagSearch = ({ myTags, onChange }) => {
           .slice(0, 10)
           .map((item) => (
             <div
-              onClick={() => onSearch(tagsList.find((el) => el.tagName === item.tagName))}
+              onClick={() => {
+                onSearch(tagsList.find((el) => el.tagName === item.tagName));
+              }}
               className="dropdown-row"
               key={item.tagName}
             >

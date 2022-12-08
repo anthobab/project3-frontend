@@ -5,3 +5,9 @@
   color: #c5cdd6;
   margin: 0 0.5rem 1rem;
 }
+
+@media screen and (max-width: 600px) {
+  .NavMain {
+    order: 99;
+  }
+}

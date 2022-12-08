@@ -51,6 +51,13 @@ const service = {
       .catch(errorHandler);
   },
 
+  createService(serviceData) {
+    return service
+      .post('/api/v1/services', serviceData)
+      .then((res) => res.data)
+      .catch(errorHandler);
+  },
+
   getConversations() {
     return service
       .get('/api/v1/conversations')
