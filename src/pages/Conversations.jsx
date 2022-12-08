@@ -6,6 +6,7 @@ const Conversations = () => {
   const [conversations, setConversations] = useState([]);
 
   useEffect(() => {
+    apiHandler.getConversations().then((conversations) => setConversations(conversations));
     const id = setInterval(() => {
       apiHandler.getConversations().then((conversations) => setConversations(conversations));
     }, 10000);
@@ -16,9 +17,9 @@ const Conversations = () => {
     <div>
       <h1>Conversations</h1>
       {conversations.map((conversation) => (
-        <Link key={conversation._id} to={`/conversations/${conversation._id}`}>
+        <Link key={conversation.conversationId} to={`/conversations/${conversation.conversationId}`}>
           <h3>{conversation.service.title}</h3>
-          <h4>{conversation.participants[0].username}</h4>
+          <h4>{conversation.penfriend}</h4>
         </Link>
       ))}
     </div>
