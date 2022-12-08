@@ -7,6 +7,7 @@ const OneConversation = () => {
   const [messages, setMessages] = useState([]);
 
   useEffect(() => {
+    apiHandler.getMessages(id).then((messages) => setMessages(messages));
     const intervalId = setInterval(() => {
       apiHandler.getMessages(id).then((messages) => setMessages(messages));
     }, 5000);
