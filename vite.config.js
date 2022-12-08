@@ -13,7 +13,7 @@ export default defineConfig(({ command, mode }) => {
     define: {
       __APP_ENV__: env.APP_ENV,
     },
-    plugins: [react(), postcssNested],
+    plugins: [react(), postcssNested()],
     server: {
       port: env.PORT || 5173,
     },
