@@ -16,7 +16,10 @@ const OneConversation = () => {
   return (
     <>
       {messages.map((message) => (
-        <div style={{ border: '1px solid black', margin: '15px 30px', padding: '5px', borderRadius: '10px' }}>
+        <div
+          key={message._id}
+          style={{ border: '1px solid black', margin: '15px 30px', padding: '5px', borderRadius: '10px' }}
+        >
           <h3>{message.sender.username}</h3>
           <p>{message.content}</p>
         </div>
