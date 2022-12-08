@@ -31,9 +31,12 @@
 
   & .title-line {
     display: flex;
+    gap: 1rem;
     width: 100%;
     max-width: 400px;
     justify-content: space-between;
+    align-items: center;
+
     position: absolute;
     bottom: 0rem;
     left: 0;

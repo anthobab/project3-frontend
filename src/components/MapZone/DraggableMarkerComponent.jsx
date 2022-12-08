@@ -32,9 +32,9 @@ const DraggableMarkerComponent = () => {
     () => ({
       dragend() {
         const marker = markerRef.current;
-        console.log('markref', markerRef, marker);
+        // console.log('markref', markerRef, marker);
         if (marker != null) {
-          console.log('getLatLng', marker.getLatLng());
+          // console.log('getLatLng', marker.getLatLng());
           const { lat, lng } = marker.getLatLng();
           setGeoloc((currentloc) => {
             return {

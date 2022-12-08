@@ -23,6 +23,7 @@ const FormService = () => {
     initialized: false,
     permission: 'denied',
     coordinates: {
+      // centre de Paris
       latitude: 48.85356416664298,
       longitude: 2.348096586347212,
     },
@@ -56,6 +57,7 @@ const FormService = () => {
       //   });
     });
   }
+
   useEffect(() => {
     if (!geoloc.initialized) {
       getGeoloc();
@@ -67,6 +69,7 @@ const FormService = () => {
   const [imageFile, setImageFile] = useState(null);
 
   useEffect(() => {
+    //TODO Switch on step
     handleChange({
       target: {
         name: 'tags',
@@ -101,14 +104,26 @@ const FormService = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    const dataForm = { title, description, coordinates, tags, pictureFile };
+    const formDataService = new FormData();
+    // console.log(dataForm);
+    for (let key in dataForm) {
+      if (key === 'tags') {
+        // console.log(JSON.stringify(dataForm[key]));
+        formDataService.append(key, JSON.stringify(dataForm[key]));
+      } else {
+        formDataService.append(key, dataForm[key]);
+      }
+    }
+    // console.log(formDataService, pictureFile);
     apiHandler
-      .createService({ title, description, coordinates, tags, pictureFile })
-      .then((res) => {
-        console.log(res);
-        navigate('/services/' + { res } + '/serviceitems');
+      .createService(formDataService)
+      .then((service) => {
+        console.log(service);
+        // navigate('/services/' + { service._id } + '/serviceitems');
       })
       .catch((e) => {
-        setError(e.response.data);
+        // setError(e.response.data);
       });
   };
 
@@ -130,7 +145,7 @@ const FormService = () => {
   };
 
   const stepNavigateHandle = (increment) => {
-    // TODO limitation condition if empty
+    // TODO limitation condition if empty title...
     setStep((curVal) => curVal + increment);
   };
 
