@@ -21,7 +21,7 @@ const NavMain = () => {
       </NavLink>
       {isLoggedIn && (
         <>
-          <NavLink to="/myservices" style={({ isActive }) => (isActive ? activeStyle : undefined)}>
+          <NavLink to="/services/myServices" style={({ isActive }) => (isActive ? activeStyle : undefined)}>
             <FontAwesomeIcon icon={faSquarePlus} />
           </NavLink>
           <NavLink to="/conversations" style={({ isActive }) => (isActive ? activeStyle : undefined)}>

@@ -118,12 +118,11 @@ const FormService = () => {
     // console.log(formDataService, pictureFile);
     apiHandler
       .createService(formDataService)
-      .then((service) => {
-        console.log(service);
-        // navigate('/services/' + { service._id } + '/serviceitems');
+      .then(({ service }) => {
+        navigate('/services/myServices/' + service._id);
       })
       .catch((e) => {
-        // setError(e.response.data);
+        setError(e.response.data);
       });
   };
 

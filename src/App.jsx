@@ -8,10 +8,12 @@ import NavMain from './components/Nav/NavMain';
 import PrivateRoute from './components/ProtectedRoute/PrivateRoute';
 import LoggedOut from './components/LoggedOut/LoggedOut';
 import MapZone from './components/MapZone/MapZone';
-import MyServices from './pages/MyServices';
+import Services from './pages/Services';
 import OneConversation from './pages/OneConversation';
+import NewService from './pages/NewService';
 
 function App() {
+  //Ironhack Paris Coordinates
   const coordinate = {
     latitude: 48.8525,
     longitude: 2.388,
@@ -31,7 +33,9 @@ function App() {
         <Route element={<PrivateRoute />}>
           {/* All routes after the PrivateRoute require the user to be loggedIn */}
           <Route path="/profile" element={<Profile />} />
-          <Route path="/myservices" element={<MyServices />} />
+          <Route path="/services/new" element={<NewService />} />
+          <Route path="/services/:step" element={<Services />} />
+          <Route path="/services/:step/:id" element={<Services />} />
           <Route path="/conversations" element={<Conversations />} />
           <Route path="/conversations/:id" element={<OneConversation />} />
         </Route>

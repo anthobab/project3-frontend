@@ -58,6 +58,27 @@ const service = {
       .catch(errorHandler);
   },
 
+  getMyServices() {
+    return service
+      .get('/api/v1/services/my')
+      .then((res) => res.data)
+      .catch(errorHandler);
+  },
+
+  // getServices(searchString,tags,dateStart,dateEnd) {
+  //   return service
+  //     .get('/api/v1/services/',)
+  //     .then((res) => res.data)
+  //     .catch(errorHandler);
+  // },
+
+  getServiceById(serviceId) {
+    return service
+      .get('/api/v1/services/' + serviceId)
+      .then((res) => res.data)
+      .catch(errorHandler);
+  },
+
   getConversations() {
     return service
       .get('/api/v1/conversations')
